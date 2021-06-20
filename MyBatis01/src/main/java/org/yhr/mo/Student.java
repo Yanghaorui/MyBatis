@@ -1,10 +1,14 @@
 package org.yhr.mo;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("student")
 public class Student {
 
     private Integer id;
     private String name;
     private Integer age;
+    private Teacher teacher;
 
     public Integer getId() {
         return id;
@@ -30,12 +34,21 @@ public class Student {
         this.age = age;
     }
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", teacher=" + teacher +
                 '}';
     }
 }

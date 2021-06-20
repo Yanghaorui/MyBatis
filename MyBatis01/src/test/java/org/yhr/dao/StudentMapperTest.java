@@ -23,7 +23,7 @@ public class StudentMapperTest {
     @Test
     public void getByIdTest(){
         MybatisUtils.select(StudentMapper.class,(mapper)->{
-            Student student = mapper.getById(1);
+            Student student = mapper.getById(10);
             System.out.println(student);
         });
     }

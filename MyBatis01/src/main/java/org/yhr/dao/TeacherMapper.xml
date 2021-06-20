@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yhr.dao.TeacherMapper">
+    <!--  resultType:虽然返回的是List,但是我们只关注泛型即可  -->
+    <select id="get" resultType="org.yhr.mo.Teacher">
+        select * from teacher
+    </select>
+
+    <!-- 基本数据类型的入参 可以不用写parameterType   -->
+    <select id="getById" resultType="org.yhr.mo.Teacher">
+        select * from teacher where id = ${id}
+    </select>
+
+    <!-- #{} 和 ${}的区别：
+         #{}可以获取基本类型，以及传入对象的属性,${}只能获取基本类型，传入的是什么就是什么，获取不了传入对象的属性-->
+    <insert id="add" parameterType="org.yhr.mo.Teacher">
+        insert into teacher (name) values (#{name}) <!--这里就不能用${} 因为传入的是student,${}获取不到 student下的name和age-->
+    </insert>
+
+    <update id="update" parameterType="org.yhr.mo.Teacher">
+        update teacher set name=#{name} where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from student where id=${id} <!--这里既可以用${},也可以用#{}-->
+    </delete>
+
+    <select id="like" resultType="org.yhr.mo.Teacher">
+        select * from student where name like #{name}
+    </select>
+
+    <resultMap id="teacher" type="org.yhr.mo.Teacher">
+
+    </resultMap>
+
+    <update id="updateByMap" parameterType="map">
+        update student set name=#{username} where id = #{no}
+    </update>
+
+</mapper>

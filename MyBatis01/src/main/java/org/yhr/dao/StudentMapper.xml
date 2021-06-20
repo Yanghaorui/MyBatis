@@ -8,15 +8,23 @@
         select * from student
     </select>
 
+    <resultMap id="_student" type="student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <!--  select中填写获取teacher的方法      -->
+        <association property="teacher" column="tid" javaType="org.yhr.mo.Teacher" select="getTeacher"/>
+    </resultMap>
+
     <!-- 基本数据类型的入参 可以不用写parameterType   -->
-    <select id="getById" resultType="org.yhr.mo.Student">
+    <select id="getById" resultMap="_student">
         select * from student where id = ${id}
     </select>
 
     <!-- #{} 和 ${}的区别：
          #{}可以获取基本类型，以及传入对象的属性,${}只能获取基本类型，传入的是什么就是什么，获取不了传入对象的属性-->
     <insert id="add" parameterType="org.yhr.mo.Student">
-        insert into student (name,age) values (#{name},#{age}) <!--这里就不能用${} 因为传入的是student,${}获取不到 student下的name和age-->
+        insert into student (name,age,tid) values (#{name},#{age},#{tid}) <!--这里就不能用${} 因为传入的是student,${}获取不到 student下的name和age-->
     </insert>
 
     <update id="update" parameterType="org.yhr.mo.Student">
@@ -24,7 +32,7 @@
     </update>
 
     <delete id="delete" parameterType="int">
-       delete from student where id=${id} <!--这里既可以用${},也可以用#{}-->
+        delete from student where id=${id} <!--这里既可以用${},也可以用#{}-->
     </delete>
 
     <select id="like" resultType="org.yhr.mo.Student">
@@ -34,5 +42,9 @@
     <update id="updateByMap" parameterType="map">
         update student set name=#{username} where id = #{no}
     </update>
+
+    <select id="getTeacher" resultType="org.yhr.mo.Teacher">
+        select * from teacher where id=#{tid}
+    </select>
 
 </mapper>

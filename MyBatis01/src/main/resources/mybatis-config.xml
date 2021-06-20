@@ -7,6 +7,15 @@
 
     <properties resource="db.properties"/>
 
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <typeAliases>
+<!--        <typeAlias alias="student" type="org.yhr.mo.Student"/>-->
+        <package name="org.yhr"/>
+    </typeAliases>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -19,6 +28,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="org/yhr/dao/StudentMapper.xml"/>
+        <package name="org.yhr.dao"/>
     </mappers>
 </configuration>

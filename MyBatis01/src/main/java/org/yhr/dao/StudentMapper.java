@@ -1,6 +1,7 @@
 package org.yhr.dao;
 
 import org.yhr.mo.Student;
+import org.yhr.mo.Teacher;
 
 import java.util.List;
 import java.util.Map;
@@ -20,4 +21,6 @@ public interface StudentMapper {
     int delete(int id);
 
     void updateByMap(Map<String,Object> map);
+
+    Teacher getTeacher(Integer tid);
 }
